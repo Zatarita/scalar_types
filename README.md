@@ -1,3 +1,7 @@
+```
+cargo add scalar_types
+```
+
 This library was created to assist with parsing endian sensitive content. It allows us to parse the data normally as though it was native endianness. Then when we need the value we can cast the value to the desired endianness.
 
 This saves us from having to create conditional parsing using T::from_xx_bytes, and instead allows us to lazily parse the values. then convert them when we need them. this acts kinda like a endian “superposition”.
