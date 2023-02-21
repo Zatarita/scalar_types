@@ -100,7 +100,7 @@ fn write_some_stuff() -> Result<()> {
     let endian_value = Endian::new(2u32);
  
     // Finally we write the output
-    if let Some(value) = endian_value.cast(endian_value) {
+    if let Some(value) = endian_value.cast(endianness) {
         // We've already handled endianness, so we will use the built-in to_ne_bytes function
         output.write(&value.to_ne_bytes())?;
     }
