@@ -1,5 +1,10 @@
+to use type this in cargo in your project directory
 ```
 cargo add scalar_types
+```
+or add this dependancy
+```
+scalar_types = "0.1.0"
 ```
 
 This library was created to assist with parsing endian sensitive content. It allows us to parse the data normally as though it was native endianness. Then when we need the value we can cast the value to the desired endianness.
