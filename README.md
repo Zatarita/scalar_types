@@ -82,9 +82,9 @@ fn write_some_stuff() -> Result<()> {
     // Moving forward:
     // Our spec says we need to write 0x01 for big endian, or 0x00 for little.
     if endianness.is_big() {
-        write!(output, "\x01");
+        write!(output, "\x01")?;
     } else {
-        write!(output, "\x00");
+        write!(output, "\x00")?;
     };
  
     // Next we're going to create our native endian 0x02 value
@@ -93,7 +93,7 @@ fn write_some_stuff() -> Result<()> {
     // Finally we write the output
     if let Some(value) = endian_value.cast(endian_value) {
         // We've already handled endianness, so we will use the built-in to_ne_bytes function
-        output.write(&value.to_ne_bytes())
+        output.write(&value.to_ne_bytes())?;
     }
  
     Ok(())
