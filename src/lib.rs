@@ -100,18 +100,18 @@
 //!     // Moving forward:
 //!     // Our spec says we need to write 0x01 for big endian, or 0x00 for little.
 //!     if endianness.is_big() {
-//!         write!(output, "\x01");
+//!         write!(output, "\x01")?;
 //!     } else {
-//!         write!(output, "\x00");
+//!         write!(output, "\x00")?;
 //!     };
 //! 
 //!     // Next we're going to create our native endian 0x02 value
 //!     let endian_value = Endian::new(2u32);
 //! 
 //!     // Finally we write the output
-//!     if let Some(value) = endian_value.cast(endian_value) {
+//!     if let Some(value) = endian_value.cast(endianness) {
 //!         // We've already handled endianness, so we will use the built-in to_ne_bytes function
-//!         output.write(&value.to_ne_bytes())
+//!         output.write(&value.to_ne_bytes())?;
 //!     }
 //! 
 //!     Ok(())
@@ -188,7 +188,7 @@ impl<T: Copy + Default> Endian<T> {
 
     /// UNSAFE
     /// 
-    /// Reads and returns a ScalarT::Native(T) from any type that implements the std:io::Read trait. 
+    /// Reads and returns a Endian::Native(T) from any type that implements the std:io::Read trait. 
     /// Advances the stream by the size of type T bytes.
     /// 
     /// Marked unsafe as it uses a raw pointer; however, 
@@ -221,7 +221,7 @@ impl<T: Copy + Default> Endian<T> {
         }
     }
 
-    /// Attempts to cast the value held by ScalarT to a big endian value.
+    /// Attempts to cast the value held by Endian to a big endian value.
     /// Only fail condition is if get_native_endianness fails somehow
     ///
     /// This shouldn't really be possible; however, it does call unsafe. 
@@ -256,7 +256,7 @@ impl<T: Copy + Default> Endian<T> {
         }
     }
 
-    /// Attempts to cast the value held by ScalarT to a little endian value.
+    /// Attempts to cast the value held by Endian to a little endian value.
     /// Only fail condition is if get_native_endianness fails somehow
     ///
     /// This shouldn't really be possible; however, it does call unsafe. 
@@ -291,7 +291,7 @@ impl<T: Copy + Default> Endian<T> {
         }
     }
 
-    /// Attempts to cast the value held by ScalarT to a native endian value.
+    /// Attempts to cast the value held by Endian to a native endian value.
     /// Only fail condition is if get_native_endianness fails somehow
     ///
     /// This shouldn't really be possible; however, it does call unsafe. 
@@ -337,7 +337,7 @@ impl<T: Copy + Default> Endian<T> {
         }
     }
 
-    /// Attempts to cast the value held by ScalarT to a specified endianness
+    /// Attempts to cast the value held by Endian to a specified endianness
     /// Only fail condition is if get_native_endianness fails somehow
     ///
     /// This shouldn't really be possible; however, it does call unsafe. 
